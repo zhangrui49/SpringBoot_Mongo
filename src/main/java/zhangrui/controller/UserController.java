@@ -19,10 +19,33 @@ public class UserController {
         try {
             userDao.save(user);
         }catch (Exception e){
-            return "插入"+user.getName()+"失败" + e.toString();
+            return "insert"+user.getName()+"failed" + e.toString();
         }
-        return "插入"+user.getName()+"成功";
+        return "insert"+user.getName()+"success";
     }
+
+    @RequestMapping("/deleteOne")
+    @ResponseBody
+    public String deleteOne(@RequestBody User user){
+        try {
+            userDao.delete(user);
+        }catch (Exception e){
+            return "delete"+user.getName()+"failed" + e.toString();
+        }
+        return "delete"+user.getName()+"success";
+    }
+
+    @RequestMapping("/deleteAll")
+    @ResponseBody
+    public String deleteAll(){
+        try {
+            userDao.deleteAll();
+        }catch (Exception e){
+            return "deleteAll failed" + e.toString();
+        }
+        return "deleteAll success";
+    }
+
 
     @Autowired
     private UserDao userDao;
