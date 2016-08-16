@@ -7,9 +7,9 @@ import org.springframework.data.annotation.Id;
  * Created by zhangrui on 2016/8/16.
  */
 public class User {
-    @Id
-    private String id;
 
+    //private String id;
+    @Id
     private String name;
 
     private String email;

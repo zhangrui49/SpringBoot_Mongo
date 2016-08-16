@@ -1,5 +1,7 @@
 package zhangrui.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,9 @@ public class UserController {
     @ResponseBody
     public String insert(@RequestBody User user){
         try {
+            if(userDao.exists(user.getName())){
+                return "insert"+user.getName()+"failed user exist";
+            }
             userDao.save(user);
         }catch (Exception e){
             return "insert"+user.getName()+"failed" + e.toString();
@@ -46,6 +51,16 @@ public class UserController {
         return "deleteAll success";
     }
 
+    @RequestMapping("/getUserInfo")
+    @ResponseBody
+    public String getUserInfo(String name){
+        try {
+          return JSON.toJSONString(userDao.findOne(name));
+        }catch (Exception e){
+            return "find failed"+ e.toString();
+        }
+       // return "";
+    }
 
     @Autowired
     private UserDao userDao;

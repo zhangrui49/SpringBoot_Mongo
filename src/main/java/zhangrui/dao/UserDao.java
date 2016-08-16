@@ -10,5 +10,7 @@ import zhangrui.model.User;
  */
 @Transactional
 public interface UserDao extends MongoRepository<User,String> {
-    User findByName(String name);
+//    User findByName(String name);
+//    boolean isExist(String name);
+//    User findOne(String name);
 }
